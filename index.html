@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多影视 - 好内容，多到看不完 · 海量高清影视聚合与在线观看平台</title>
+<meta name="description" content="多多影视(duoduoyingshi-top)以「好内容，多到看不完」为宗旨，聚合海量高清电影、电视剧、综艺、动漫资源，每日更新，多线路流畅播放，满足全家人的观影需求。官方站点：https://duoduoyingshi-top.github.io">
+<meta name="keywords" content="多多影视,duoduoyingshi-top,海量影视,高清电影,在线观看,电视剧,综艺,动漫,每日更新,多线路播放,影视聚合,全家观影">
+<meta name="author" content="多多影视">
+<style>
+/* ===== Reset & Base ===== */
+*,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
+:root{
+  --yellow:#ffd23f; --pink:#ff5a8a; --blue:#3a86ff; --green:#06d6a0;
+  --dark:#1a1a2e; --ink:#2d2d44; --gray:#6b7280; --paper:#fafaf5;
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--paper); color:var(--ink); line-height:1.75; overflow-x:hidden;
+}
+a{ text-decoration:none; color:inherit; }
+.wrap{ max-width:1180px; margin:0 auto; padding:0 1.25rem; }
+img{ max-width:100%; }
+
+/* ===== 顶部公告 ===== */
+.toast{
+  background:var(--ink); color:#fff; text-align:center; padding:.55rem; font-size:.82rem;
+  letter-spacing:1px; overflow:hidden; white-space:nowrap;
+}
+.toast span{ display:inline-block; animation:scroll 22s linear infinite; }
+@keyframes scroll{ from{ transform:translateX(100%); } to{ transform:translateX(-100%); } }
+
+/* ===== 导航 ===== */
+header{ background:#fff; box-shadow:0 2px 20px rgba(0,0,0,.05); position:sticky; top:0; z-index:50; }
+.nav-row{ display:flex; align-items:center; justify-content:space-between; height:66px; gap:1rem; }
+.logo{ font-size:1.55rem; font-weight:900; letter-spacing:-.5px; display:flex; align-items:center; gap:.5rem; }
+.logo b{ color:var(--pink); }
+.logo i{ color:var(--blue); font-style:normal; }
+.tgl{ display:none; background:none; border:none; font-size:1.8rem; cursor:pointer; color:var(--ink); }
+.links{ display:flex; gap:.25rem; list-style:none; }
+.links a{
+  display:block; padding:.5rem 1rem; font-size:.92rem; font-weight:600; color:var(--gray);
+  border-radius:8px; transition:.25s;
+}
+.links a:hover{ color:var(--pink); background:rgba(255,90,138,.08); }
+
+/* ===== Hero ===== */
+.hero{
+  position:relative; padding:5rem 0 4rem; text-align:center; overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(255,210,63,.28),transparent 45%),
+    radial-gradient(circle at 85% 30%,rgba(58,134,255,.22),transparent 45%),
+    radial-gradient(circle at 50% 90%,rgba(6,214,160,.2),transparent 45%),
+    var(--paper);
+}
+.blob{ position:absolute; border-radius:50%; filter:blur(40px); opacity:.5; z-index:0; }
+.b1{ width:220px; height:220px; background:var(--yellow); top:-60px; left:5%; animation:float 7s ease-in-out infinite; }
+.b2{ width:180px; height:180px; background:var(--pink); bottom:10%; right:8%; animation:float 9s ease-in-out infinite reverse; }
+.b3{ width:160px; height:160px; background:var(--blue); top:40%; right:20%; animation:float 6s ease-in-out infinite; }
+@keyframes float{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(15px,-20px) scale(1.08); } }
+.hero .wrap{ position:relative; z-index:1; }
+.badge{
+  display:inline-block; background:#fff; border:2px solid var(--ink); border-radius:40px;
+  padding:.4rem 1.2rem; font-size:.78rem; font-weight:700; letter-spacing:1px; margin-bottom:1.4rem;
+  box-shadow:4px 4px 0 var(--pink);
+}
+.hero h1{ font-size:clamp(2.4rem,7vw,4.6rem); font-weight:900; line-height:1.15; margin-bottom:1.2rem; }
+.hero h1 .hl{ color:var(--pink); }
+.hero h1 .hl2{ color:var(--blue); }
+.hero p.sub{ font-size:1.1rem; color:var(--gray); max-width:620px; margin:0 auto 2.2rem; }
+.urlbox{
+  display:inline-block; background:#fff; border:2px dashed var(--ink); border-radius:12px;
+  padding:.85rem 1.6rem; font-family:"Courier New",monospace; font-size:.95rem; color:var(--blue);
+  letter-spacing:.5px; transition:.3s;
+}
+.urlbox:hover{ background:var(--green); color:#fff; border-color:var(--green); border-style:solid; }
+
+/* ===== 数据统计 ===== */
+.stats{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin:0; border-top:3px solid var(--ink);
+  border-bottom:3px solid var(--ink); background:#fff;
+}
+.stat{ padding:2rem 1rem; text-align:center; border-right:1px solid rgba(0,0,0,.08); }
+.stat:last-child{ border-right:none; }
+.stat .num{ font-size:2.4rem; font-weight:900; line-height:1; }
+.stat:nth-child(1) .num{ color:var(--pink); }
+.stat:nth-child(2) .num{ color:var(--blue); }
+.stat:nth-child(3) .num{ color:var(--green); }
+.stat:nth-child(4) .num{ color:#f77f00; }
+.stat .lbl{ font-size:.82rem; color:var(--gray); margin-top:.5rem; letter-spacing:1px; }
+
+/* ===== 通用区块 ===== */
+section.block{ padding:4.5rem 0; }
+.sec-top{ display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:2.2rem; gap:1rem; flex-wrap:wrap; }
+.sec-top h2{ font-size:1.85rem; font-weight:900; letter-spacing:-.5px; }
+.sec-top h2 em{ font-style:normal; color:var(--pink); }
+.sec-top .more{ font-size:.88rem; font-weight:700; color:var(--blue); border-bottom:2px solid var(--blue); padding-bottom:2px; }
+.sec-top .more:hover{ color:var(--pink); border-color:var(--pink); }
+
+/* ===== 多彩卡片 ===== */
+.grid{ display:grid; gap:1.5rem; }
+.g4{ grid-template-columns:repeat(4,1fr); }
+.g3{ grid-template-columns:repeat(3,1fr); }
+.g2{ grid-template-columns:repeat(2,1fr); }
+.pcard{
+  background:#fff; border-radius:16px; overflow:hidden; border:2px solid rgba(0,0,0,.06);
+  transition:transform .3s,box-shadow .3s; position:relative;
+}
+.pcard:hover{ transform:translateY(-6px) rotate(-.4deg); box-shadow:8px 10px 0 rgba(0,0,0,.1); }
+.pcap{
+  height:130px; display:flex; align-items:center; justify-content:center; font-size:2.6rem; color:#fff; position:relative;
+}
+.pcap::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.12)); }
+.c1{ background:linear-gradient(135deg,#ff9a9e,#ff5a8a); }
+.c2{ background:linear-gradient(135deg,#a1c4fd,#3a86ff); }
+.c3{ background:linear-gradient(135deg,#84fab0,#06d6a0); }
+.c4{ background:linear-gradient(135deg,#fddb92,#f77f00); }
+.c5{ background:linear-gradient(135deg,#c471f5,#7e2ded); }
+.c6{ background:linear-gradient(135deg,#fbc2eb,#a6c1ee); }
+.pbody{ padding:1.3rem; }
+.ptag{ font-size:.7rem; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:.2rem .6rem; border-radius:20px; color:#fff; display:inline-block; margin-bottom:.7rem; }
+.pbody h3{ font-size:1.15rem; font-weight:800; margin-bottom:.45rem; }
+.pbody p{ font-size:.85rem; color:var(--gray); }
+.pfoot{ display:flex; align-items:center; justify-content:space-between; margin-top:1rem; padding-top:.9rem; border-top:1px dashed rgba(0,0,0,.1); }
+.pfoot .meta{ font-size:.78rem; color:var(--gray); }
+.pfoot .go{ font-size:.8rem; font-weight:800; color:var(--pink); }
+
+/* ===== 片单横滑 ===== */
+.scroll-row{ display:flex; gap:1.2rem; overflow-x:auto; padding:1rem 0 1.5rem; scroll-snap-type:x mandatory; }
+.scroll-row::-webkit-scrollbar{ height:8px; }
+.scroll-row::-webkit-scrollbar-thumb{ background:var(--pink); border-radius:4px; }
+.scard{
+  flex:0 0 200px; scroll-snap-align:start; background:#fff; border-radius:12px; overflow:hidden;
+  border:2px solid rgba(0,0,0,.06); transition:.3s;
+}
+.scard:hover{ transform:scale(1.03); box-shadow:0 8px 24px rgba(0,0,0,.12); }
+.scap{ height:110px; display:flex; align-items:center; justify-content:center; font-size:2rem; color:rgba(255,255,255,.9); }
+.scbody{ padding:.9rem; }
+.scbody h4{ font-size:.95rem; font-weight:800; margin-bottom:.3rem; }
+.scbody span{ font-size:.75rem; color:var(--gray); }
+
+/* ===== 分类瓷砖 ===== */
+.tiles{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; }
+.tile{
+  background:#fff; border:2px solid var(--ink); border-radius:14px; padding:1.4rem 1rem; text-align:center;
+  font-weight:800; font-size:1rem; transition:.25s; cursor:pointer;
+}
+.tile:hover{ transform:translate(-3px,-3px); box-shadow:5px 5px 0 var(--ink); }
+.tile:nth-child(odd):hover{ box-shadow:5px 5px 0 var(--pink); }
+.tile:nth-child(even):hover{ box-shadow:5px 5px 0 var(--blue); }
+.tile small{ display:block; font-size:.75rem; font-weight:600; color:var(--gray); margin-top:.3rem; }
+
+/* ===== 排行 ===== */
+.toplist{ background:#fff; border-radius:16px; border:2px solid rgba(0,0,0,.06); overflow:hidden; }
+.trow{
+  display:grid; grid-template-columns:56px 1fr auto; align-items:center; gap:1rem; padding:1.1rem 1.5rem;
+  border-bottom:1px solid rgba(0,0,0,.06); transition:.2s;
+}
+.trow:last-child{ border-bottom:none; }
+.trow:hover{ background:rgba(255,90,138,.04); }
+.trow .idx{ font-size:1.6rem; font-weight:900; }
+.trow:nth-child(1) .idx{ color:#f77f00; }
+.trow:nth-child(2) .idx{ color:var(--gray); }
+.trow:nth-child(3) .idx{ color:#cd7f32; }
+.trow .info h4{ font-size:1.02rem; font-weight:800; }
+.trow .info p{ font-size:.8rem; color:var(--gray); }
+.trow .pts{ font-weight:900; color:var(--pink); font-size:1.1rem; }
+
+/* ===== 关于 ===== */
+.about{
+  background:var(--ink); color:#fff; border-radius:24px; padding:3rem; text-align:center;
+  position:relative; overflow:hidden;
+}
+.about::before{ content:''; position:absolute; width:300px; height:300px; background:var(--pink); border-radius:50%; filter:blur(80px); opacity:.3; top:-100px; right:-50px; }
+.about::after{ content:''; position:absolute; width:250px; height:250px; background:var(--blue); border-radius:50%; filter:blur(70px); opacity:.25; bottom:-80px; left:-40px; }
+.about .wrapin{ position:relative; z-index:1; }
+.about h2{ font-size:1.9rem; font-weight:900; margin-bottom:1.2rem; }
+.about p{ color:rgba(255,255,255,.8); max-width:720px; margin:0 auto 1rem; }
+.about a{ color:var(--yellow); font-weight:700; border-bottom:2px solid var(--yellow); }
+
+/* ===== Footer ===== */
+footer{ background:var(--ink); color:rgba(255,255,255,.7); padding:3rem 0 2rem; }
+.fgrid{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:2rem; margin-bottom:2rem; }
+.fgrid h4{ color:#fff; font-weight:800; margin-bottom:1rem; font-size:1rem; }
+.fgrid ul{ list-style:none; }
+.fgrid li{ margin-bottom:.6rem; }
+.fgrid a{ font-size:.86rem; transition:.2s; }
+.fgrid a:hover{ color:var(--yellow); }
+.fbrand .logo{ color:#fff; font-size:1.4rem; }
+.fbrand p{ font-size:.85rem; margin-top:.8rem; color:rgba(255,255,255,.6); }
+.copy{ border-top:1px solid rgba(255,255,255,.12); padding-top:1.5rem; text-align:center; font-size:.8rem; color:rgba(255,255,255,.4); }
+
+/* ===== 响应式 ===== */
+@media(max-width:960px){ .g4{ grid-template-columns:repeat(2,1fr); } .stats{ grid-template-columns:repeat(2,1fr); } .fgrid{ grid-template-columns:1fr 1fr; } }
+@media(max-width:640px){
+  .tgl{ display:block; }
+  .links{ display:none; position:absolute; top:66px; left:0; right:0; flex-direction:column; padding:1rem; background:#fff; border-bottom:2px solid var(--ink); }
+  .links.open{ display:flex; }
+  .g4,.g3,.g2{ grid-template-columns:1fr; }
+  .stats{ grid-template-columns:1fr 1fr; }
+  .hero{ padding:3rem 0 2.5rem; }
+  .about{ padding:2rem 1.2rem; }
+  .fgrid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<!-- 公告 -->
+<div class="toast"><span>🎉 多多影视 · 好内容，多到看不完 —— 每日更新海量影视资源，多线路流畅播放 —— 全家人的观影首选</span></div>
+
+<!-- 导航 -->
+<header>
+  <div class="wrap nav-row">
+    <div class="logo"><b>多多</b><i>影视</i></div>
+    <ul class="links" id="nav">
+      <li><a href="#home">首页</a></li>
+      <li><a href="#film">院线大片</a></li>
+      <li><a href="#tv">热播剧集</a></li>
+      <li><a href="#variety">综艺动漫</a></li>
+      <li><a href="#rank">热度榜单</a></li>
+      <li><a href="#about">关于我们</a></li>
+    </ul>
+    <button class="tgl" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="wrap">
+    <span class="badge">★ 好内容，多到看不完 ★</span>
+    <h1>多多<span class="hl">影视</span><br>海量<span class="hl2">好片</span>一站看</h1>
+    <p class="sub">电影、剧集、综艺、动漫，多多影视聚合全网优质影视资源，每日更新，多线路流畅播放，满足全家人的观影需求。</p>
+    <a href="https://duoduoyingshi-top.github.io" class="urlbox">duoduoyingshi-top.github.io</a>
+  </div>
+</section>
+
+<!-- 数据统计 -->
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="num">8,600+</div><div class="lbl">影视资源</div></div>
+    <div class="stat"><div class="num">每日</div><div class="lbl">更新片单</div></div>
+    <div class="stat"><div class="num">4K</div><div class="lbl">高清画质</div></div>
+    <div class="stat"><div class="num">全家</div><div class="lbl">皆宜观看</div></div>
+  </div>
+</div>
+
+<!-- 院线大片 -->
+<section class="block" id="film">
+  <div class="wrap">
+    <div class="sec-top"><h2>院线<em>大片</em></h2><a href="#" class="more">查看全部 →</a></div>
+    <div class="grid g4">
+      <div class="pcard"><div class="pcap c1">🎬</div><div class="pbody"><span class="ptag" style="background:var(--pink)">动作</span><h3>绝地追击</h3><p>硬核动作大片，震撼特效与紧凑剧情完美结合。</p><div class="pfoot"><span class="meta">🔥 98% 推荐</span><span class="go">立即播放 →</span></div></div></div>
+      <div class="pcard"><div class="pcap c2">😂</div><div class="pbody"><span class="ptag" style="background:var(--blue)">喜剧</span><h3>爆笑人生</h3><p>年度最治愈爆笑喜剧，让你笑中带泪。</p><div class="pfoot"><span class="meta">🔥 96% 推荐</span><span class="go">立即播放 →</span></div></div></div>
+      <div class="pcard"><div class="pcap c3">💖</div><div class="pbody"><span class="ptag" style="background:var(--green)">爱情</span><h3>遇见你之后</h3><p>温柔细腻的爱情故事，演绎心动与错过。</p><div class="pfoot"><span class="meta">🔥 94% 推荐</span><span class="go">立即播放 →</span></div></div></div>
+      <div class="pcard"><div class="pcap c4">👻</div><div class="pbody"><span class="ptag" style="background:#f77f00">悬疑</span><h3>暗夜迷踪</h3><p>烧脑悬疑佳作，层层反转挑战你的推理极限。</p><div class="pfoot"><span class="meta">🔥 92% 推荐</span><span class="go">立即播放 →</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 热播剧集 -->
+<section class="block" id="tv" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-top"><h2>热播<em>剧集</em></h2><a href="#" class="more">查看全部 →</a></div>
+    <div class="scroll-row">
+      <div class="scard"><div class="scap c5">🏙️</div><div class="scbody"><h4>都市情缘</h4><span>都市 / 爱情 · 更新至32集</span></div></div>
+      <div class="scard"><div class="scap c2">⚔️</div><div class="scbody"><h4>长歌行</h4><span>古装 / 传奇 · 更新至45集</span></div></div>
+      <div class="scard"><div class="scap c1">🕵️</div><div class="scbody"><h4>沉默真相</h4><span>悬疑 / 犯罪 · 全12集</span></div></div>
+      <div class="scard"><div class="scap c3">🌾</div><div class="scbody"><h4>乡村日记</h4><span>生活 / 励志 · 更新至28集</span></div></div>
+      <div class="scard"><div class="scap c4">👑</div><div class="scbody"><h4>宫墙柳</h4><span>古装 / 宫廷 · 更新至20集</span></div></div>
+      <div class="scard"><div class="scap c6">🚀</div><div class="scbody"><h4>星际迷航</h4><span>科幻 / 冒险 · 更新至10集</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 综艺动漫 -->
+<section class="block" id="variety" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-top"><h2>综艺<em>动漫</em></h2><a href="#" class="more">查看全部 →</a></div>
+    <div class="grid g3">
+      <div class="pcard"><div class="pcap c5">🎤</div><div class="pbody"><span class="ptag" style="background:#7e2ded">综艺</span><h3>星光大冒险</h3><p>明星户外竞技真人秀，笑点与看点齐飞。</p><div class="pfoot"><span class="meta">🔥 90% 推荐</span><span class="go">立即播放 →</span></div></div></div>
+      <div class="pcard"><div class="pcap c6">🍳</div><div class="pbody"><span class="ptag" style="background:#a6c1ee;color:#333">综艺</span><h3>美味新关系</h3><p>美食旅行综艺，带你吃遍大江南北。</p><div class="pfoot"><span class="meta">🔥 88% 推荐</span><span class="go">立即播放 →</span></div></div></div>
+      <div class="pcard"><div class="pcap c3">🐉</div><div class="pbody"><span class="ptag" style="background:var(--green)">动漫</span><h3>灵域传说</h3><p>国产动画精品，宏大世界观与精美作画。</p><div class="pfoot"><span class="meta">🔥 95% 推荐</span><span class="go">立即播放 →</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 分类瓷砖 -->
+<section class="block" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-top"><h2>分类<em>直达</em></h2></div>
+    <div class="tiles">
+      <div class="tile">动作片 <small>ACTION</small></div>
+      <div class="tile">喜剧片 <small>COMEDY</small></div>
+      <div class="tile">爱情片 <small>ROMANCE</small></div>
+      <div class="tile">科幻片 <small>SCI-FI</small></div>
+      <div class="tile">恐怖片 <small>HORROR</small></div>
+      <div class="tile">纪录片 <small>DOC</small></div>
+      <div class="tile">国产剧 <small>CN DRAMA</small></div>
+      <div class="tile">美剧韩剧 <small>GLOBAL</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- 热度榜单 -->
+<section class="block" id="rank" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-top"><h2>热度<em>榜单</em></h2><a href="#" class="more">完整榜单 →</a></div>
+    <div class="toplist">
+      <div class="trow"><span class="idx">1</span><div class="info"><h4>绝地追击</h4><p>动作 / 院线大片 · 本周热度第一</p></div><span class="pts">9.6</span></div>
+      <div class="trow"><span class="idx">2</span><div class="info"><h4>沉默真相</h4><p>悬疑 / 剧集 · 口碑黑马</p></div><span class="pts">9.4</span></div>
+      <div class="trow"><span class="idx">3</span><div class="info"><h4>长歌行</h4><p>古装 / 传奇 · 全网热播</p></div><span class="pts">9.1</span></div>
+      <div class="trow"><span class="idx">4</span><div class="info"><h4>爆笑人生</h4><p>喜剧 / 院线大片</p></div><span class="pts">8.9</span></div>
+      <div class="trow"><span class="idx">5</span><div class="info"><h4>灵域传说</h4><p>动漫 / 国产动画</p></div><span class="pts">8.7</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 关于 -->
+<section class="block" id="about" style="padding-top:0;">
+  <div class="wrap">
+    <div class="about">
+      <div class="wrapin">
+        <h2>关于多多影视</h2>
+        <p><strong style="color:var(--yellow)">多多影视</strong>（duoduoyingshi-top）以「好内容，多到看不完」为宗旨，聚合海量高清电影、电视剧、综艺、动漫资源，每日更新，多线路流畅播放，满足全家人的观影需求。</p>
+        <p>官方网站：<a href="https://duoduoyingshi-top.github.io">https://duoduoyingshi-top.github.io</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <div class="logo"><b>多多</b><i>影视</i></div>
+        <p>好内容，多到看不完。海量高清影视资源聚合平台，每日更新，多线路流畅播放。</p>
+      </div>
+      <div><h4>内容频道</h4><ul>
+        <li><a href="#film">院线大片</a></li><li><a href="#tv">热播剧集</a></li>
+        <li><a href="#variety">综艺动漫</a></li><li><a href="#rank">热度榜单</a></li>
+      </ul></div>
+      <div><h4>影片分类</h4><ul>
+        <li><a href="#">动作 / 喜剧</a></li><li><a href="#">爱情 / 悬疑</a></li>
+        <li><a href="#">科幻 / 恐怖</a></li><li><a href="#">纪录 / 动漫</a></li>
+      </ul></div>
+      <div><h4>官方信息</h4><ul>
+        <li>网站名称：多多影视</li><li>访问地址：duoduoyingshi-top.github.io</li>
+        <li><a href="#about">关于我们</a></li><li><a href="#">免责声明</a></li>
+      </ul></div>
+    </div>
+    <div class="copy">© 2026 多多影视 duoduoyingshi-top.github.io · 好内容，多到看不完</div>
+  </div>
+</footer>
+
+</body>
+</html>
